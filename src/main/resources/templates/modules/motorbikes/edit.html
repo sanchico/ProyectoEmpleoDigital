@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Preferences</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row" ng-controller="MotorbikeController"
+     ng-init="ctrlmoto.editMotorbike()">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Motorbikes</div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="alert alert-success" role="alert"
+                             ng-if="ctrlmoto.successMessage">{{ctrlmoto.successMessage}}</div>
+                        <div class="alert alert-danger" role="alert"
+                             ng-if="ctrlmoto.errorMessage">{{ctrlmoto.errorMessage}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form role="form" name="myForm" ng-submit="ctrlmoto.submit()">
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+
+                                            <label class="col-md-2 control-lable" for="umodel">Model</label>
+                                            <div class="col-md-5">
+                                                <input id="umodel" class="form-control input-sm"
+                                                       ng-model="ctrlmoto.motorbike.model" required ng-minlength="3"
+                                                       placeholder="Introduce el modelo">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label class="col-md-2 control-lable" for="unumber">Number</label>
+                                            <div class="col-md-5">
+                                                <input id="unumber" class="form-control input-sm"
+                                                       ng-model="ctrlmoto.motorbike.number" required
+                                                       ng-minlength="3"
+                                                       placeholder="Introduce el numero de matricula">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label class="col-md-2 control-lable" for="ulatitude">Latitude</label>
+                                            <div class="col-md-5">
+                                                <input id="ulatitude" class="form-control input-sm"
+                                                       ng-model="ctrlmoto.motorbike.latitude" required
+                                                       ng-minlength="3" placeholder="Introduce la latitud">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label class="col-md-2 control-lable" for="ulongitude">Longitude</label>
+                                            <div class="col-md-5">
+                                                <input id="ulongitude" class="form-control input-sm"
+                                                       ng-model="ctrlmoto.motorbike.longitude" required
+                                                       ng-minlength="3" placeholder="Introduce la longitud">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label class="col-md-2 control-lable" for="ureserved">Reserved</label>
+                                            <div class="col-md-5">
+                                                <input type="checkbox" value="" 
+                                                       id="ureserved" class="form-control-inline" 
+                                                       ng-model="ctrlmoto.motorbike.reserved">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" class="form-control"
+                                   ng-model="ctrlmoto.Motorbike.id">
+                            <!-- Buttons -->
+                            <div class="row"></div>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="submit" class="btn btn-primary btn-sm"
+                                           value="{{!ctrlmoto.Motorbike.id_Motorbike ? 'Add' : 'Update'}}"
+                                           ng-disabled="myForm.$invalid || myForm.$pristine" />
+                                    <button type="button" class="btn btn-warning btn-sm"
+                                            ng-click="ctrlmoto.reset()">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Preferences</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row" ng-controller="UserController"
+	ng-init="ctrl.editUser()">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Users</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-md-12">
+						<div class="alert alert-success" role="alert"
+							ng-if="ctrl.successMessage">{{ctrl.successMessage}}</div>
+						<div class="alert alert-danger" role="alert"
+							ng-if="ctrl.errorMessage">{{ctrl.errorMessage}}</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<form role="form" name="myForm" ng-submit="ctrl.submit()">
+							<div class="row">
+								<div class="form-group col-md-12">
+
+									<label class="col-md-2 control-lable" for="uname">Name</label>
+									<div class="col-md-7">
+										<input id="uname" class="form-control input-sm"
+											ng-model="ctrl.user.name" required ng-minlength="3"
+											placeholder="Introduce el nombre del Usuario">
+									</div>
+								</div>
+							</div>	
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label class="col-md-2 control-lable" for="upassword">Password</label>
+										<div class="col-md-7">
+											<input id="upassword" class="form-control input-sm"
+												ng-model="ctrl.user.password" required ng-minlength="3"
+												placeholder="Introduce la contraseña">
+										</div>
+									</div>
+								</div>
+									<div class="row">
+										<div class="form-group col-md-12">
+										      <div class="center-block">
+											               <label class="col-md-4 control-lable" for="urole">Role</label> 
+									          
+									          
+											<div class="radio-inline">
+                                                  <label><input id="userrole" type="radio" ng-checked="true" ng-model="ctrl.user.role" value="ROLE_USER">User</label>
+                                            </div>
+                                            
+                                            <div class="radio-inline">
+                                                  <label><input id="adminrole" type="radio" ng-model="ctrl.user.role" value="ROLE_ADMIN">Admin</label>
+                                               </div>
+                                            </div>
+                                         </div>
+									</div>
+					
+					<input type="hidden" class="form-control"
+                                            ng-model="ctrl.user.id_user">
+					<!-- Buttons -->
+
+                                        <div class="form-group col-md-12">
+                                                <div class="col-md-7 col-md-offset-2">
+                                                        <input type="submit" class="btn btn-primary btn-sm"
+                                                                value="{{!ctrl.user.id_user ? 'Add' : 'Update'}}"
+                                                                ng-disabled="myForm.$invalid || myForm.$pristine" />
+                                                        <button type="button" class="btn btn-warning btn-sm"
+                                                                ng-click="ctrl.reset()">Cancel</button>
+                                                </div>
+                                        </div>
+                                                </form>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
