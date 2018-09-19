@@ -1,7 +1,11 @@
 
 
-angular.module('ProjectApp').controller('IndexController', [ '$sessionStorage', '$localStorage', '$http', '$q', 'urls', '$scope',
-	function($sessionStorage, $localStorage, $http, $q, urls, $scope) {
+
+//Este js controla con la directiva Ng-init el index.html para saber si estamos en modo administrador o en modo user, ocultando la
+//la zona de administador cuando eres usuario
+
+angular.module('ProjectApp').controller('IndexController', [ '$sessionStorage', '$localStorage', '$http', '$q', 'urls', '$scope','$location',
+	function($sessionStorage, $localStorage, $http, $q, urls, $scope,$location) {
 
 
 		/////////////////////Crear objeto Usuario Loqueado////////////
@@ -14,10 +18,12 @@ angular.module('ProjectApp').controller('IndexController', [ '$sessionStorage', 
 				.then(
 					function(response) {
 						console.log('Fetched successfully UsuarioLogueado');
-						// $localStorage.usuarioLoqueado = response.data;
+
 						$sessionStorage.usuarioLogueado = response.data;
 						deferred.resolve(response);
 						$scope.comprobacion();
+						motoDispoble();
+						console.log('Fetched successfully UsuarioLogueado'+$scope.motoDispobile);
 					},
 					function(errResponse) {
 						console.error('Error while loading UsuarioLoqueado');
@@ -29,6 +35,64 @@ angular.module('ProjectApp').controller('IndexController', [ '$sessionStorage', 
 
 			return deferred.promise;
 		}
+		
+		
+		
+		
+		 function motoDispoble (){
+				
+
+
+			
+			var deferred = $q.defer();
+			$http.post(urls.BOOKING_SERVICE_API)
+				.then(
+					function(response) {
+						console.log('Fetched successfully motoDisponible');
+						
+						var comprobacion = response.data;
+						
+						deferred.resolve(response);
+						
+						
+						if(comprobacion === null || comprobacion === undefined  )
+
+							{
+							
+
+							$scope.motoList=true;
+							$scope.motoshowMap=false;
+						
+							}else{	
+								
+								
+								$scope.motoList=false;
+								$scope.motoshowMap=true;
+								}
+						
+						
+						
+						
+					},
+					function(errResponse) {
+						console.error('Error while loading motoDisponible');
+						$sessionStorage.usuarioLogueado = null;
+						deferred.reject(errResponse);
+						
+						
+						
+					}
+
+			);
+
+
+		}
+			
+			
+				
+					
+			
+
 
 
 
@@ -46,44 +110,21 @@ angular.module('ProjectApp').controller('IndexController', [ '$sessionStorage', 
 				if (usuarioLogueadoRole.role !== undefined && usuarioLogueadoRole.role !== null) {
 
 
-					//$rootScope.$apply();
+					
 
 					var nombre = document.getElementById("nombreusuario").value;
 
 					if( (usuarioLogueadoRole.role === 'ROLE_USER') ) {
 						return true;
 					}
-					console.log("Fuera de la funcion $sessionStorage.usuarioLogueado.role=" + (usuarioLogueadoRole.role));
+
 					return false;
 				}
 			}
 			return false;
 		}
 
-		///////////////////////////////////MAPA GOOGLE/////////////////////
-
-		//		var divmapa=document.getElementById("mapa");
-		//		
-		//		navigator.geolocation.getCurrentPosition(funcion_ok,funcion_mal);
-		//		function funcion_mal (){}
-		//		
-		//		function funcion_ok (respuesta){
-		//			
-		//			var latitud=respuesta.coords.latitude;
-		//			var longitud=respuesta.coords.longitude;
-		//			
-		//			var latitudLongitud=new google.maps.LatLng (latitud,longitud);
-		//			
-		//			var configuracion={
-		//					
-		//					zoom:17,
-		//					center:latitudLongitud
-		//			}
-		//			
-		//			var googlemap=new google.maps.Map(divmapa,configuracion)
-		//			
-		//		}
-
+		
 
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="ProjectApp">
+<html lang="en" data-ng-app="ProjectApp" >
 <head lang="en">
 <meta charset="UTF-8" />
 <base href="/" />
@@ -19,6 +19,10 @@
 
 <link href="/custom/css/main.css" rel="stylesheet" type="text/css" />
 
+<!-- 	GoogleMaps -->
+	
+
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -28,7 +32,6 @@
 
 </head>
 <body  ng-controller="IndexController" ng-init="UsuarioLogueado()">
-
 	<div id="wrapper">
 
 		<!-- Navigation -->
@@ -63,21 +66,19 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="/"><i class="fa fa-dashboard fa-fw"></i>
-								Dashboard  </a></li>
-						    <li><a href="bookings-list.html">
-									<i class="fa fa-retweet fa-fw"></i> Alquileres</a>
-								
+					
+						<li><a href="logo-showLogo.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard  </a></li>
+						
+							<li ><a href="bookings-showMap.html"  ><i class="fa fa-motorcycle fa-fw"></i> Alquiler</a></li>
+	
+<!-- 						<li ng-if="motoshowMap"><a href="bookings-showMap.html" ng-click="motoDispoble()" ><i class="fa fa-motorcycle fa-fw"></i> Alquiler</a></li> -->
+<!-- 						<li ng-if="motoList"><a href="bookings-list.html"  ng-click="motoDispoble()"><i class="fa fa-motorcycle fa-fw"></i> Alquiler</a></li> -->
 
-								
-								</li>
-
-
-								<li ng-hide="comprobacion()" ><a href="#" ><i class="fa fa-wrench fa-fw"></i>
-									Preferences<span class="fa arrow"></span></a>
-								<ul class="nav nav-second-level">
-									<li><a href="users-list.html" class="fa fa-user" >  Users</a></li>
-									<li><a href="motorbikes-list.html" class="fa fa-motorcycle">  Motos</a></li>
+						<li ng-hide="comprobacion()" ><a href="#" ><i class="fa fa-wrench fa-fw"></i>
+								Preferences<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="users-list.html">Users</a></li>
+								<li><a href="motorbikes-list.html">Motos</a></li>
 								<!--li>
                                     <a href="buttons.html">Buttons</a>
                                 </li>
@@ -135,13 +136,12 @@
 	<script src="/app/users/UserController.js"></script>
 	<script src="/app/motorbikes/MotorBikeService.js"></script>
 	<script src="/app/motorbikes/MotorbikeController.js"></script>
+	<script src="/app/bookings/BookingController.js"></script>
+	<script src="/app/bookings/BookingService.js"></script>
 
-
-	<!-- 	GoogleMaps -->
 	
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByRld4GaxMp_e6yX3zxaa1fqW_KXh29j8&callback=initMap"
-  type="text/javascript"></script>
 
+	
 
 
 </body>

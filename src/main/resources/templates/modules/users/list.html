@@ -17,25 +17,22 @@
 				<div class="row">
 					<div class="form-group col-md-12">
 						<div class="floatRight">
-							<button type="button" ng-click="ctrl.showUser(u.id_user)" class="btn btn-primary btn-sm">Nuevo</button>
+							<button type="button" ng-click="ctrl.showUser(u.id_user)" class="btn btn-info btn-sm">Nuevo</button>
 						</div>
 					</div>
 				</div>
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 					<tr>
-						<th>ID {{user}}</th>
 						<th>NAME</th>
 						<th>ROLES</th>
 						<th width="200">ACCIONES</th>
 					</tr>
 					</thead>
 					<tbody>
-					<tr>
 					<tr ng-repeat="u in ctrl.getAllUsers()">
-						<td>{{u.id_user}}</td>
 						<td>{{u.name}}</td>
-						<td>{{u.role}}</td>
+						<td>{{(u.role==='ROLE_ADMIN'? 'Administrador': 'Usuario')}}</td>
 						<td>
 							<button type="button" ng-click="ctrl.showUser(u.id_user)" class="btn btn-success custom-width">Edit</button>
 							<button type="button" ng-click="ctrl.removeUser(u.id_user)" class="btn btn-danger custom-width">Remove</button>

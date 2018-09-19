@@ -3,10 +3,10 @@ var app = angular.module("ProjectApp", ['ui.router','ngStorage']); //introduce l
 
 app.constant('urls', {
 	
-    BASE: location.origin,
-    USER_SERVICE_API : location.origin+'/api/admin/user/',
-    MOTORBIKE_SERVICE_API : location.origin+'/api/admin/motorbike/',
-    BOOKING_SERVICE_API: location.origin+'/api/user/booking/',
+    BASE: 'http://'+location.host,
+    USER_SERVICE_API : 'http://'+location.host+'/api/admin/user/',
+    MOTORBIKE_SERVICE_API : 'http://'+location.host+'/api/admin/motorbike/',
+    BOOKING_SERVICE_API: location.origin+'/api/user/booking/'
     	
 });
 
@@ -14,6 +14,7 @@ app.constant('urls', {
 app.config(function($locationProvider) {
     $locationProvider.html5Mode(true);
 });
+
 
 /* Setup App Main Controller */
 app.controller('ProjectApp', ['$scope', '$rootScope',
@@ -26,6 +27,11 @@ app.controller('ProjectApp', ['$scope', '$rootScope',
         });
     }
 ]);
+app.controller('showMapCtrl', ['$scope', function($scope){
+    $scope.a = -34.397;
+    $scope.b = 150.644;
+
+}])
 
 
 
@@ -69,21 +75,8 @@ app.config(['$stateProvider', '$urlRouterProvider', //ui-router
                     }
                 }
             })
-            
-          .state('bookings-list', {
-                url: '/bookings-list.html',
-                templateUrl: 'partials/modules/bookings/list',
-                controller: 'BookingController',
-                controllerAs:'ctrlbooking',
-//                resolve: {
-//                    bookings: function ($q, BookingService) {
-//                        console.log('Load all bookings');
-//                        var deferred = $q.defer();
-//                        BookingService.loadAllMotorbikes().then(deferred.resolve, deferred.resolve);
-//                        return deferred.promise;
-//                    }
-//                }
-            })
+               
+
              
             .state('users-edit', {
                 url: '/users-edit.html?id',
@@ -105,6 +98,43 @@ app.config(['$stateProvider', '$urlRouterProvider', //ui-router
                     }
                 }
             })
+
+            .state('bookings-showMap', {
+                url: '/bookings-showMap.html',
+                templateUrl: 'partials/modules/bookings/showMap',
+                controller: 'BookingController',
+                controllerAs: 'ctrlbooking',
+                resolve: {
+                	availableMotorbikes: function ($q, BookingService) {
+                		console.log('Load available motorbikes');
+                		
+                        var deferred = $q.defer();
+                        BookingService.loadAvailableMotorbikes().then(deferred.resolve, deferred.resolve);
+                        return deferred.promise;
+                	}
+                }
+            
+            })
+            
+            .state('bookings-list', {
+                url: '/bookings-list.html?id',
+                templateUrl: 'partials/modules/bookings/list',
+                controller: 'BookingController',
+                controllerAs: 'ctrlbooking',
+                resolve: {
+                	motorbikes: function ($q, BookingService) {
+                    }
+                }
+            
+            })
+            
+            .state('logo-showLogo', {
+                url: '/logo-showLogo.html',
+                templateUrl: 'partials/modules/logo/showLogo',
+                
+                
+            })
+            
             
             .state('logout', {
                 url: '/logout',
@@ -116,4 +146,6 @@ app.config(['$stateProvider', '$urlRouterProvider', //ui-router
             });
         $urlRouterProvider.otherwise('/');
 }]);
+
+
 

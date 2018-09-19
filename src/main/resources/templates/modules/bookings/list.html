@@ -1,33 +1,182 @@
+
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">Bookings</h1>
-		<p>esto es list.html en bookings</p>
-						<table class="table table-striped table-bordered table-hover">
-					<thead>
-					<tr>
-						<th>ID {{user}}</th>
-						<th>NAME</th>
-						<th>ROLES</th>
-						<th width="200">ACCIONES</th>
-					</tr>
-					</thead>
-					<tbody>
-<!--
-					<tr ng-repeat="u in ctrl.getAllUsers()">
-						<td>{{u.id_user}}</td>
-						<td>{{u.name}}</td>
-						<td>{{u.role}}</td>
-						<td>
-							<button type="button" ng-click="ctrl.showUser(u.id_user)" class="btn btn-success custom-width">Edit</button>
-							<button type="button" ng-click="ctrl.removeUser(u.id_user)" class="btn btn-danger custom-width">Remove</button>
-						</td>
-					</tr>
--->
-					</tbody>
-				</table>
 	</div>
 	<!-- /.col-lg-12 -->
 	<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
+<div class="row" ng-controller="BookingController"
+	ng-init="ctrlbooking.editMotorbike4()">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">{{ctrlbooking.availableMotorbike.reserved===true? 'Alquilar':'Devolver'}}  </div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-md-12">
+						<div class="alert alert-success" role="alert"
+							ng-if="ctrlbooking.successMessage">{{ctrlbooking.successMessage}}</div>
+						<div class="alert alert-danger" role="alert"
+							ng-if="ctrlbooking.errorMessage">{{ctrlbooking.errorMessage}}</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<form id="form" name="myForm" ng-submit="ctrlbooking.submit1()">
 
+							<div class="row">
+								<div class="form-group col-md-12">
+
+									<div class="row">
+										<div class="form-group col-md-12">
+
+											<label class="col-md-2 control-lable" for="umodel">Model</label>
+											<div class="col-md-6">
+												<input class="form-control input-sm"
+													value="{{ctrlbooking.availableMotorbike.model}}"
+													readonly="readonly">
+											</div>
+										</div>
+									</div>
+
+
+
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label class="col-md-2 control-lable" for="unumber">Number</label>
+											<div class="col-md-6">
+												<input class="form-control input-sm"
+													value="{{ctrlbooking.availableMotorbike.number}}"
+													readonly="readonly">
+											</div>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label class="col-md-2 control-lable" for="ulatitude">Latitude</label>
+											<div class="col-md-6">
+												<input class="form-control input-sm"
+													value="{{ctrlbooking.availableMotorbike.latitude}}"
+													readonly="readonly">
+											</div>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label class="col-md-2 control-lable" for="ulongitude">Longitude</label>
+											<div class="col-md-6">
+											<input class="form-control input-sm"
+													value="{{ctrlbooking.availableMotorbike.longitude}}"
+													readonly="readonly">
+											</div>
+										</div>
+									</div>
+
+
+									<div>
+
+										<div class="row"
+											ng-show="(ctrlbooking.availableMotorbike.reserved===true)">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-lable" for="upickupDate">pickupDate</label>
+												<div class="col-md-5">
+													<input readonly="readonly" type="datetime-local" id="upickupDate"
+														class="form-control input-sm"
+														ng-model="pickdata"
+
+														>
+												</div>
+											</div>
+										</div>
+
+										<div class="row"
+											ng-show="(ctrlbooking.availableMotorbike.reserved===false)">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-lable" for="upickupDate">pickupDate</label>
+												<div class="col-md-5">
+													<input type="text" readonly
+														value="{{ctrlbooking.booking.pickupDate}}"
+														
+														id="upickupDateHidden" class="form-control input-sm">
+												</div>
+											</div>
+										</div>
+
+										<div class="row"
+											ng-show="(ctrlbooking.availableMotorbike.reserved===true)">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-lable" for="udropoffDate">dropoffDate</label>
+												<div class="col-md-5">
+													<input type="datetime-local" id="udropoffDateHidden"
+														class="form-control input-sm"
+														ng-model="ctrlbooking.booking.dropoffDate"
+														 placeholder="Introduce la dropoffDate">
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row"
+										ng-show="(ctrlbooking.availableMotorbike.reserved===false)">
+										<div class="form-group col-md-12">
+											<label class="col-md-2 control-lable" for="udropoffDate">dropoffDate</label>
+											<div class="col-md-5">
+												<input type="text" readonly
+
+													   value="{{ctrlbooking.booking.dropoffDate}}"
+													id="udropoffDate" class="form-control input-sm">
+											</div>
+										</div>
+									</div>
+								<div class="row"
+										ng-show="(ctrlbooking.availableMotorbike.reserved===false)">
+										<div class="form-group col-md-12">
+											<label class="col-md-2 control-lable" for="udropoffDate">RealDate</label>
+											<div class="col-md-5">
+												<input type="datetime-local" readonly
+													ng-model="devolucionReal"
+													id="RealDropOffDate" class="form-control input-sm">
+											</div>
+								</div>
+								
+
+							</div>
+					</div>
+
+				</div>
+			</div>
+			<input type="hidden" readonly class="form-control"
+				ng-model="ctrlbooking.booking.id_booking"> <input
+				type="hidden" readonly class="form-control"
+				ng-model="ctrlbooking.availableMotorbike.id_Motorbike">
+
+			<!-- Buttons -->
+			<div class="row"></div>
+			<div class="form-group col-md-12">
+				<div class="col-md-5 col-md-offset-2">
+					<!--                                     <input type="submit" class="btn btn-primary btn-sm" -->
+					<!--                                            value="{{ctrlbooking.availableMotorbike.id_Motorbike ? 'Alquilar' : 'devolver'}}" -->
+					<!--                                             /> -->
+					<button form="form" class="btn btn-primary btn-sm">{{(ctrlbooking.availableMotorbike.reserved
+						? 'Alquilar' : 'devolver')}}</button>
+					<button ng-show="(ctrlbooking.availableMotorbike.reserved===true)"
+						type="button" class="btn btn-warning btn-sm"
+						ng-click="ctrlbooking.reset()">Cancel</button>
+
+				</div>
+			</div>
+			</form>
+		</div>
+
+	</div>
+</div>
+
+</div>
+</div>
+</div>

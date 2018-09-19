@@ -1,5 +1,5 @@
 'use strict';
-angular.module('showcase', ['datatables']);
+
 angular.module('ProjectApp').controller('UserController',
 	[ 'UserService', '$scope', '$location', '$stateParams', '$localStorage', function(UserService, $scope, $location, $stateParams, $localStorage) {
 
@@ -95,6 +95,7 @@ angular.module('ProjectApp').controller('UserController',
 		}
 
 		function showUser(id) {
+			console.log("showmuser booking"+id);
 			$location.path("users-edit.html").search({
 				id : id
 			});

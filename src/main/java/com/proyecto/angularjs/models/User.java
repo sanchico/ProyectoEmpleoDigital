@@ -31,7 +31,12 @@ import lombok.ToString;
 @Table(name = "User")
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 9052727407992747243L;
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3985614472072622616L;
 
 	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
@@ -45,7 +50,7 @@ public class User implements Serializable {
 	private String password;
 
 	@OneToMany(mappedBy="User_id",cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval = true)
-	private List<Booking> bookings = new ArrayList<>();
+	private List<Booking> bookingsUser = new ArrayList<>();
 
 	protected User() {
 	}
@@ -78,7 +83,7 @@ public class User implements Serializable {
 	/**
 	 * @return the password
 	 */
-	@JsonIgnore
+//	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -87,15 +92,16 @@ public class User implements Serializable {
 	 * @return the id
 	 */
 
-	public Long getId_user() {
-		return id_user;
-	}
-
+	
 	/**
 	 * @return the role
 	 */
 	public String getRole() {
 		return role;
+	}
+
+	public Long getId_user() {
+		return id_user;
 	}
 
 	/**
@@ -106,29 +112,19 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
-	public List<Booking> getBookings() {
-		return bookings;
+	public List<Booking> getBookingsUser() {
+		return bookingsUser;
 	}
 
-//	public void setBookings(List<Booking> bookings) {
-//		this.bookings = bookings;
-//		
-//		
-//		
-//		for (Booking book : bookings) {
-//			
-//			book.setUser_id(this);
-//		}
-//	}
-	
-	
-
+	public void setBookingsUser(List<Booking> bookingsUser) {
+		this.bookingsUser = bookingsUser;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bookings == null) ? 0 : bookings.hashCode());
+		result = prime * result + ((bookingsUser == null) ? 0 : bookingsUser.hashCode());
 		result = prime * result + ((id_user == null) ? 0 : id_user.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -145,10 +141,10 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (bookings == null) {
-			if (other.bookings != null)
+		if (bookingsUser == null) {
+			if (other.bookingsUser != null)
 				return false;
-		} else if (!bookings.equals(other.bookings))
+		} else if (!bookingsUser.equals(other.bookingsUser))
 			return false;
 		if (id_user == null) {
 			if (other.id_user != null)
@@ -176,7 +172,12 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [id_user=" + id_user + ", name=" + name + ", role=" + role + ", password=" + password
-				+ ", bookings=" + bookings + "]";
+				+ ", bookingsUser=" + bookingsUser + "]";
 	}
+
+	
+
+	
+
 
 }

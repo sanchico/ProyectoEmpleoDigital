@@ -25,7 +25,12 @@ public class MotorBike implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8777352052678301854L;
+	private static final long serialVersionUID = 6421907674793276477L;
+
+	/**
+	 * 
+	 */
+
 
 	private @Id @GeneratedValue Long id_Motorbike;
 
@@ -40,7 +45,7 @@ public class MotorBike implements Serializable {
 	private Boolean reserved;
 
 	@OneToMany(mappedBy = "Motorbike_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<Booking> bookings = new ArrayList<>();
+	private List<Booking> bookingsMotorbike = new ArrayList<>();
 
 	protected MotorBike() {
 
@@ -149,25 +154,27 @@ public class MotorBike implements Serializable {
 		return id_Motorbike;
 	}
 
-	public List<Booking> getBookings() {
-		return bookings;
-	}
+/**
+ * 
+ * @return List Booking
+ */
 
-//	public void setBookings(List<Booking> bookings) {
-//		this.bookings = bookings;
-//		for (Booking book : bookings) {
-//
-//		
-//				book.setMotorBike(this);
-//			
-//		}
-//	}
+	public List<Booking> getBookingsMotorbike() {
+		return bookingsMotorbike;
+	}
+/**
+ * 
+ * @param bookingsMotorbike
+ */
+	public void setBookingsMotorbike(List<Booking> bookingsMotorbike) {
+		this.bookingsMotorbike = bookingsMotorbike;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bookings == null) ? 0 : bookings.hashCode());
+		result = prime * result + ((bookingsMotorbike == null) ? 0 : bookingsMotorbike.hashCode());
 		result = prime * result + ((id_Motorbike == null) ? 0 : id_Motorbike.hashCode());
 		result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
 		result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
@@ -186,10 +193,10 @@ public class MotorBike implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		MotorBike other = (MotorBike) obj;
-		if (bookings == null) {
-			if (other.bookings != null)
+		if (bookingsMotorbike == null) {
+			if (other.bookingsMotorbike != null)
 				return false;
-		} else if (!bookings.equals(other.bookings))
+		} else if (!bookingsMotorbike.equals(other.bookingsMotorbike))
 			return false;
 		if (id_Motorbike == null) {
 			if (other.id_Motorbike != null)
@@ -227,7 +234,9 @@ public class MotorBike implements Serializable {
 	@Override
 	public String toString() {
 		return "MotorBike [id_Motorbike=" + id_Motorbike + ", model=" + model + ", number=" + number + ", latitude="
-				+ latitude + ", longitude=" + longitude + ", reserved=" + reserved + ", bookings=" + bookings + "]";
+				+ latitude + ", longitude=" + longitude + ", reserved=" + reserved + ", bookingsMotorbike="
+				+ bookingsMotorbike + "]";
 	}
 
+	
 }

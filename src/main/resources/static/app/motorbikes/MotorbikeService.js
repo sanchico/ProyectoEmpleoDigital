@@ -39,7 +39,7 @@ angular.module('ProjectApp').factory('MotorbikeService',
                 return $localStorage.motorbikes;
             }
 
-            function getMotorbike(id,role) {
+            function getMotorbike(id) {
                 console.log('Fetching Motorbike with id :'+id);
                 var deferred = $q.defer();
                 $http.get(urls.MOTORBIKE_SERVICE_API + id)
@@ -73,10 +73,10 @@ angular.module('ProjectApp').factory('MotorbikeService',
                 return deferred.promise;
             }
 
-            function updateMotorbike(motorBike, id) {
+            function updateMotorbike(motorbike, id) {
                 console.log('Updating Motorbike with id '+id);
                 var deferred = $q.defer();
-                $http.put(urls.MOTORBIKE_SERVICE_API+ id, motorBike)
+                $http.put(urls.MOTORBIKE_SERVICE_API+ id, motorbike)
                     .then(
                         function (response) {
                             loadAllMotorbikes();

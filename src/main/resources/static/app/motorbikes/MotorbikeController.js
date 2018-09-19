@@ -1,5 +1,9 @@
 'use strict';
 
+
+//El atributo reserved es igual a true quiere decir que es disponible (No Alquilada) pero si es false quiere decir que no está 
+// disponible (Alquilada)
+
 angular.module('ProjectApp').controller('MotorbikeController',
 	[ 'MotorbikeService', '$scope', '$location', '$stateParams', function(MotorbikeService, $scope, $location, $stateParams) {
 
@@ -44,7 +48,7 @@ angular.module('ProjectApp').controller('MotorbikeController',
 						self.errorMessage = '';
 						self.done = true;
 						self.motorbike = {};
-						$location.path("motorbike-list.html");
+						$location.path("motorbikes-list.html");
 					},
 					function(errResponse) {
 						console.error('Error while creating Motorbike');

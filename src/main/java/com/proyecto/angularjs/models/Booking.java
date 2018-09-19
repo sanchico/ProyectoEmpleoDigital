@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -23,27 +24,40 @@ import lombok.Data;
 public class Booking implements Serializable {
 
 	
-	private static final long serialVersionUID = -2944830735091525349L;
 	
 	
-	private @Id @GeneratedValue Long id;
 	
-	private Long User_id;
+
+
+	private static final long serialVersionUID = -247755875550102105L;
+
+	private @Id @GeneratedValue Long id_booking;
+	
+	
+	
+	/*
+	 * Intentamos implementar ManyToOne y causaba problemas con JSON, por lo cual 
+	 * optamos por Long User_id, Long Motorbike_id y haciendo esto JSON no 
+	 * causaba problemas.
+	 * */
 	
 //	@ManyToOne(fetch=FetchType.LAZY)
 //	@JoinColumn(name="User_ID")
-	//private User user;
+//	@JsonBackReference (value="bookingsUser")
+//	private User user;
 	
 //	@ManyToOne(fetch=FetchType.LAZY )
 //	@JoinColumn(name="Motorbike_ID")
+//	@JsonBackReference(value="bookingsMotorbike")
 //	private MotorBike motorBike;
-	
+	private Long User_id;
 	
 	private Long Motorbike_id;
 	
 	private Date pickupDate;
 	
 	private Date dropoffDate;
+	private Date devolucionReal;
 	
 	private Integer reservationDuration;
 	
@@ -51,20 +65,16 @@ public class Booking implements Serializable {
 		
 	}
 
-	public Booking(Long user_id, Long motorBike_id, Date pickupDate, Date dropoffDate, Integer reservationDuration) {
+	public Booking(Long User_id, Long Motorbike_id, Date pickupDate, Date dropoffDate, Integer reservationDuration,Date devolucionReal) {
 		super();
-		this.User_id = user_id;
-		this.Motorbike_id = motorBike_id;
+		this.User_id = User_id;
+		this.Motorbike_id = Motorbike_id;
 		this.pickupDate = pickupDate;
 		this.dropoffDate = dropoffDate;
 		this.reservationDuration = reservationDuration;
-		
+		this.devolucionReal= devolucionReal;
 	}
-	/**
-	 * 
-	 * @return the user
- 	 */
-
+	
 
 	/**
 	 * 
@@ -103,9 +113,19 @@ public class Booking implements Serializable {
 	 * @return the reservationDuration
 	 */
 
+	
+	
 	public Integer getReservationDuration() {
 		return reservationDuration;
 	}
+	public Date getDevolucionReal() {
+		return devolucionReal;
+	}
+
+	public void setDevolucionReal(Date devolucionReal) {
+		this.devolucionReal = devolucionReal;
+	}
+
 	/**
 	 * 
 	 * @param reservationDuration the reservationDuration to set
@@ -119,22 +139,47 @@ public class Booking implements Serializable {
 	 * @return the id
 	 */
 
-	public Long getId() {
-		return id;
+	public Long getId_booking() {
+		return id_booking;
 	}
+	
+	
+	
+	
+	
+	/**
+	 * 
+	 * @return the user
+ 	 */
+
 
 	public Long getUser_id() {
 		return User_id;
 	}
 
+	/**
+	 * 
+	 * @param user_id
+	 */
 	public void setUser_id(Long user_id) {
 		User_id = user_id;
 	}
 
+	
+	
+	/**
+	 * 
+	 * @return Mototbike_id
+	 */
 	public Long getMotorbike_id() {
 		return Motorbike_id;
 	}
-
+	
+	
+	/**
+	 * 
+	 * @param motorbike_id
+	 */
 	public void setMotorbike_id(Long motorbike_id) {
 		Motorbike_id = motorbike_id;
 	}
@@ -146,7 +191,7 @@ public class Booking implements Serializable {
 		result = prime * result + ((Motorbike_id == null) ? 0 : Motorbike_id.hashCode());
 		result = prime * result + ((User_id == null) ? 0 : User_id.hashCode());
 		result = prime * result + ((dropoffDate == null) ? 0 : dropoffDate.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((id_booking == null) ? 0 : id_booking.hashCode());
 		result = prime * result + ((pickupDate == null) ? 0 : pickupDate.hashCode());
 		result = prime * result + ((reservationDuration == null) ? 0 : reservationDuration.hashCode());
 		return result;
@@ -176,10 +221,10 @@ public class Booking implements Serializable {
 				return false;
 		} else if (!dropoffDate.equals(other.dropoffDate))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (id_booking == null) {
+			if (other.id_booking != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!id_booking.equals(other.id_booking))
 			return false;
 		if (pickupDate == null) {
 			if (other.pickupDate != null)
@@ -194,7 +239,14 @@ public class Booking implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Booking [id_booking=" + id_booking + ", User_id=" + User_id + ", Motorbike_id=" + Motorbike_id
+				+ ", pickupDate=" + pickupDate + ", dropoffDate=" + dropoffDate + ", reservationDuration="
+				+ reservationDuration + "]";
+	}
 
+	
 
 
 	

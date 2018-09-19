@@ -49,4 +49,9 @@ public class MotorBikeService {
 	public void deleteMotorBikeById(Long id){
 		motorBikeRepository.deleteById(id);
 	}
+
+	public List<MotorBike> findByReserved(boolean reserved){
+		return motorBikeRepository.findByReserved(reserved);
+	}
+	
 }

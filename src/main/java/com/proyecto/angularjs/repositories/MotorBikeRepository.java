@@ -13,6 +13,6 @@ public interface MotorBikeRepository extends JpaRepository<MotorBike, Long>{
 	
 	MotorBike findByNumber(String number);
 	
-	List<MotorBike> findByReserved (Boolean isreserved);
+	List<MotorBike> findByReserved(boolean reserved);
 	
 }

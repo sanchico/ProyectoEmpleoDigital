@@ -16,9 +16,9 @@
                 <div class="row">
                     <div class="form-group col-md-12">
                         <div class="alert alert-success" role="alert"
-                             ng-if="ctrlmoto.successMessage">{{ctrlmoto.successMessage}}</div>
+                             ng-if="ctrlmoto.successMessage">{{ctrl.successMessage}}</div>
                         <div class="alert alert-danger" role="alert"
-                             ng-if="ctrlmoto.errorMessage">{{ctrlmoto.errorMessage}}</div>
+                             ng-if="ctrlmoto.errorMessage">{{ctrl.errorMessage}}</div>
                     </div>
                 </div>
                 <div class="row">
@@ -78,22 +78,27 @@
                                         </div>
                                     </div>
 
-
                                     <div class="row">
-                                        <div class="form-group col-md-12">
-                                            <label class="col-md-2 control-lable" for="ureserved">Reserved</label>
-                                            <div class="col-md-5">
-                                                <input type="checkbox" value="" 
-                                                       id="ureserved" class="form-control-inline" 
-                                                       ng-model="ctrlmoto.motorbike.reserved">
+										<div class="form-group col-md-12">
+										      <div class="center-block">
+											               <label class="col-md-3 control-lable"></label> 
+									          
+									          
+											<div class="radio-inline">
+                                                  <label for="res"><input id="res" type="radio" ng-checked="true" ng-model="ctrlmoto.motorbike.reserved" value="false">Alquilado</label>
                                             </div>
-
-                                        </div>
-                                    </div>
+                                            
+                                            <div class="radio-inline">
+                                                  <label for="unres"><input id="unres" type="radio" ng-model="ctrlmoto.motorbike.reserved" value="true">No Alquilado</label>
+                                               </div>
+                                            </div>
+                                         </div>
+									</div>
+									
                                 </div>
                             </div>
                             <input type="hidden" class="form-control"
-                                   ng-model="ctrlmoto.Motorbike.id">
+                                   ng-model="ctrlmoto.Motorbike.id_Motorbike">
                             <!-- Buttons -->
                             <div class="row"></div>
                             <div class="form-group col-md-12">
